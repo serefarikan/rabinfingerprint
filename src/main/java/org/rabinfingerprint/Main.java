@@ -92,28 +92,38 @@ public class Main {
 	}
 
 	private void run() throws Exception {
-		switch (model.mode) {
-		case FINGERPRINT:
-			if (model.inputModel == InputMode.STDIN) {
-				fingerprintStdin(checkPolynomial(model.polynomial));
-			} else {
-				fingerprintFiles(model.unflagged, checkPolynomial(model.polynomial));
-			}
-			break;
-		case HANDPRINT:
-			if (model.inputModel == InputMode.STDIN) {
-				handprintStdin(checkPolynomial(model.polynomial));
-			} else {
-				handprintFiles(model.unflagged, checkPolynomial(model.polynomial));
-			}
-			break;
-		case HELP:
-			printUsage();
-			break;
-		case POLYGEN:
-			generatePolynomial(model.degree);
-			break;
-		}
+		//run this first to get your polynomial
+		
+//		generatePolynomial(53);
+		
+		//use polynomial from the first run below
+		final RabinFingerprintLong rabin = new RabinFingerprintLong(checkPolynomial(Long.decode("0x299D185125423B")));
+		
+		rabin.pushBytes("helloworldsaysme".getBytes());
+		System.out.println(String.format("%X", rabin.getFingerprintLong()));
+
+//		switch (model.mode) {
+//		case FINGERPRINT:
+//			if (model.inputModel == InputMode.STDIN) {
+//				fingerprintStdin(checkPolynomial(model.polynomial));
+//			} else {
+//				fingerprintFiles(model.unflagged, checkPolynomial(model.polynomial));
+//			}
+//			break;
+//		case HANDPRINT:
+//			if (model.inputModel == InputMode.STDIN) {
+//				handprintStdin(checkPolynomial(model.polynomial));
+//			} else {
+//				handprintFiles(model.unflagged, checkPolynomial(model.polynomial));
+//			}
+//			break;
+//		case HELP:
+//			printUsage();
+//			break;
+//		case POLYGEN:
+//			generatePolynomial(model.degree);
+//			break;
+//		}
 	}
 	
 	public static void main(String[] args) {
